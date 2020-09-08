@@ -7,8 +7,7 @@ print(toSort)
 
 def merge_sort(array):
     copy_buffer = [None] * (len(array))
-    merge_sort_helper(array, copy_buffer, 0, len(array))
-
+    merge_sort_helper(array, copy_buffer, 0, len(array) - 1)
 
 def merge_sort_helper(array, copy_buffer, left, right):
     if left < right:

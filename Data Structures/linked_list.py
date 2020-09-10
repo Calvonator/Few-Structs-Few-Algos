@@ -6,7 +6,8 @@ class singly_linked_list():
     
 
     def create_node(self, value, next):
-        return singly_linked_list_node(value, None)
+        node = singly_linked_list_node(value, None)
+        return node
 
 
     def insert(self, value):
@@ -14,9 +15,34 @@ class singly_linked_list():
             current = self.head
 
             while current != None:
+                previous = current
                 current = current.next 
+            previous.next = self.create_node(value, None)
+        else:
+            self.head = self.create_node(value, None)
 
-            current.next = self.create_node(value, None)
+    def findMax(self):             
+        if self.head != None:
+            
+            current = self.head
+            max = current.element
+
+            while current != None:
+                if current.element > max:
+                    max = current.element
+                current = current.next
+            return max
+        else:
+            return None
+    
+    def print(self):
+        if self.head != None:
+            current = self.head
+
+            while current != None:
+                print(current.element)
+                current = current.next
+        
 
 
 
@@ -32,5 +58,8 @@ l = singly_linked_list()
 
 l.insert(10)
 l.insert(20)
+l.insert(30)
 
-print(l.head.element)
+#l.print()
+
+print(l.findMax())

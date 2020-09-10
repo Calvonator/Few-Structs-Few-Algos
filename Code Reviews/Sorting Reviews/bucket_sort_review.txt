@@ -1,0 +1,55 @@
+You have implemented an unusual bucket sort. First, the logic to compute the bucket number makes assumptions about the values themselves and will fail on many types of numbers (for example, positive integers). And second, if N is the size of the input list, you are creating N buckets. Typically, bucket sort uses a number of buckets that is smaller than N. A common approach is to make an initial pass over the values to find their min and max. Then each bucket will have a span of (MAX - MIN) / K, where K is the number of buckets (which might be set either by the caller or by the code based on N). For any x value, I think its bucket index would be min(K - 1, int((x - MIN) / SPAN)) (you should double check that).
+
+My other comments relate to code readability and simplicity.
+
+Use convenience variables to eliminate repeated calculations, such as len(array). If you need it multiple times, create a variable and lighten the visual weight of your code.
+
+Organize your code into commented "paragraphs" -- one paragraph per small step in the logic of your algorithm (shown below).
+
+If you need to iterate over values in a collection, do it directly, not indirectly via indexes. Use for x in xs not for i in range(len(xs). If the algorithm requires both values an indexes, use enumerate(). Only iterate over indexes if you don't actually need the values or if the algorithm's readability is simpler that way (for example, in your insertion_sort() function).
+
+Your code to reassemble the sorted buckets it overly complicated -- specifically, the size of the buckets is not important. The work can be done either with a list comprehension (as shown) or the equivalent use of 2 for loops.
+
+Consider using a naming convention that I learned from functional programming: xs for a collection of things and x for one thing. Its extendable (ys and y, zs and z, etc) and it works quite nicely in generic situations like this where we know nothing about the substantive meaning of the values. This also lightens up the code weight -- enhancing readability without any loss of understandability.
+
+The variable naming in insertion_sort() is backwards. You iterate over the indexes but call each index an unsorted_val. If it's an index, just call it index or, even better, i (a convention everyone understands). Then if you also need the value, get it with xs[i]. Again, notice how these short variable naming conventions can often enhance readability -- especially if the scope is small and well defined.
+
+Finally, it is unusual to modify an index value during an iteration over indexes, as you do in insertion_sort(). It forces your reader to puzzle things over. I've seen more intuitive insertion sort implementations. For comparison, see the this pseudo-code. Note how the use of "swap" in that alternative implementation really helps the reader understand what's going on. Either adjust your code or add some guidance to your reader.
+
+Here's an edit focused on the readability and simplicity issues only:
+
+```
+def bucket_sort(xs):
+    # Convenience variables.
+    N = len(xs)
+
+    # Put values into buckets.
+    buckets = [[] for _ in range(N)]
+    for x in xs:
+        i = int(N * x)
+        buckets[i].append(x)
+
+    # Sort each bucket.
+    #
+    # To keep hammering the point, `b` is a better variable
+    # name than `bucket` within this tiny, well-defined context.
+    for b in buckets:
+        insertion_sort(b)
+    
+    # Return the sorted values.
+    return [
+        x
+        for b in buckets
+        for x in b
+    ]
+
+def insertion_sort(xs):
+    # Only stylistic edits here.
+    for i in range(1, len(xs)):
+        x = xs[i]
+        while i > 0 and xs[i - 1] > x:
+            xs[i] = xs[i - 1]
+            i -= 1
+        xs[i] = x
+
+```

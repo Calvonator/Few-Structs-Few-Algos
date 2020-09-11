@@ -1,6 +1,6 @@
 import random
 #toSort = [round(random.uniform(0.10, 0.99), 2) for _ in range(20)]
-toSort = [round(random.uniform(0.10, 0.99), 2) for i in range(10, 0, -1)]
+toSort = [round(random.uniform(0.10, 0.99), 3) for i in range(10, 0, -1)]
 print(toSort)
 
 #Optimisation: Once each item is placed into a bucket, place the unsorted buckets back 
@@ -13,17 +13,36 @@ print(toSort)
 #   - Postman's Sort
 #   - Shuffle Sort
 
+#"Efficient" Bucket Sort that use K number of buckets based on (K = min(N // 3, 10)) Still trying to make this work, not really motivated atm
+def bucket_sort(xs): #, K
 
-def bucket_sort(xs, k):
+    N = len(xs)
+
+    K = min(N // 3, 10)
+
+    MIN, MAX = linear_search_min_max(xs)
+
+    SPAN = (MAX - MIN) // K
+    print(SPAN)
 
 
-    
+    buckets = [[] for _ in range(K)]
+    #sorted_buckets = []
+
+    for i in range(N):
+        print(i)
+        bucket_index = min(K - 1, int((xs[i] - MIN) / SPAN))
+        buckets[bucket_index].append(xs[i])
 
 
+    for b in buckets:
+        insertion_sort(b)
 
-    return
-
-
+    return [
+        x
+        for b in buckets
+        for x in b
+    ]
 
 
 
@@ -39,7 +58,7 @@ def generic_bucket_sort(xs):
     for index in range(N):
 
         bucket_num = N * xs[index] 
-        print(bucket_num)
+        #print(bucket_num)
         buckets[int(bucket_num)].append(xs[index])
 
     for bucket in buckets:
@@ -56,9 +75,8 @@ def generic_bucket_sort(xs):
 
         else:
             sorted_buckets.append(bucket[0])
-
-    return sorted_buckets
-
+    xs.clear()
+    xs.extend(sorted_buckets)
 
 def insertion_sort(xs):
     #For each item in the array not including the first item (x). 
@@ -80,7 +98,21 @@ def insertion_sort(xs):
 def swap(xs, y, z):
     xs[y], xs[z] = xs[z], xs[y]
 
-toSort = generic_bucket_sort(toSort)
+
+
+def linear_search_min_max(xs):
+    min = xs[0]
+    max = xs[1]
+
+    for x in xs:
+        if x < min:
+            min = x 
+        elif x > max:
+            max = x 
+    return min, max
+
+
+toSort = bucket_sort(toSort)
 
 print(toSort)
 

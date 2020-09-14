@@ -1,0 +1,21 @@
+Doubly Linked List
+    - Sorted Insertion
+    - Deletion
+    - Merging
+
+
+
+Singly Linked List
+    - Sorted Insertion
+    - Deletion
+    - Merging
+
+
+To Implement:
+
+    - Heap
+    - Hash Table/Tree
+    - Graph
+
+
+https://en.wikipedia.org/wiki/List_of_data_structures

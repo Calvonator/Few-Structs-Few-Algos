@@ -21,7 +21,7 @@ class singly_linked_list():
         else:
             self.head = self.create_node(value, None)
 
-    def findMax(self):             
+    def find_max(self):             
         if self.head != None:
             
             current = self.head
@@ -59,7 +59,11 @@ l = singly_linked_list()
 l.insert(10)
 l.insert(20)
 l.insert(30)
+l.insert(40)
+l.insert(50)
+l.insert(60)
 
-#l.print()
 
-print(l.findMax())
+l.print()
+
+print(l.find_max())

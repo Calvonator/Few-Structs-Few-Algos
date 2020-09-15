@@ -21,6 +21,20 @@ class singly_linked_list():
         else:
             self.head = self.create_node(value, None)
 
+
+    def delete(self, target):           #Not done
+        if self.head != None:
+            current = self.head
+
+            while current.element != target or current != None:    
+                previous = current
+                current = current.next
+            
+            
+
+
+
+
     def find_max(self):             
         if self.head != None:
             

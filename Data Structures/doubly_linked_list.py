@@ -7,7 +7,7 @@ class doubly_linked_list():
         self.size = 0
 
     def create_node(self, value):
-        return doubly_linked_list_node(value)
+        return doubly_linked_list_node(value, None, None)
 
     def insert(self, value):            #Alter this insert function to place nodes in a sorted manner.
         if self.head != None:
@@ -42,14 +42,28 @@ class doubly_linked_list():
                 current = current.next
             return max
 
+    def find_target(self, target):
+
+        current = self.head
+        previous = self.head.previous
+
+        while current != None:
+            if current.element == target:
+                return True
+            previous = current
+            current = current.next
+
+
+
+
 
 
 class doubly_linked_list_node():
 
-    def __init__(self, value):
+    def __init__(self, value, prev, next):
         self.element = value
-        self.previous = None
-        self.next = None
+        self.previous = prev
+        self.next = next
 
 
 dl = doubly_linked_list()

@@ -5,6 +5,7 @@ class binary_tree:
     def __init__(self):
         self.root = None
         self.size = 1
+        
 
             
     def create_node(self, value):
@@ -61,7 +62,22 @@ class binary_tree:
             self.in_order_traversal_helper(node.right)
             print(node.element)
             self.in_order_traversal_helper(node.left)
-            
+    
+    def create_array(self):                                 #Creates an array of the binary tree's data using in-order traversal
+        
+        arr = []
+        self.create_array_helper(self.root, arr)
+        return arr
+
+                            
+
+    def create_array_helper(self, left, array):                                   
+        if left != None:
+            self.create_array_helper(left.left, array)
+            #print(left.element)
+            array.append(left.element)
+            self.create_array_helper(left.right, array)
+
 
         
 
@@ -72,10 +88,8 @@ class binary_tree_node:
         self.right = None
 
 
-tree = binary_tree()
+tree = binary_tree()node = 0
 
-tree.insert(10)
-tree.insert(9)
 tree.insert(8)
 tree.insert(7)
 tree.insert(11)
@@ -87,9 +101,15 @@ tree.insert(6)
 tree.insert(3)
 
 
-root = tree.root
+#root = tree.root
 
 
 #tree.pre_order_traversal()
 #tree.in_order_traversal()
-tree.post_order_traversal()
+#tree.post_order_traversal()
+
+binary_arr = tree.create_array()
+
+print(f'Holaa\n{binary_arr}')
+
+

@@ -30,10 +30,6 @@ class singly_linked_list():
                 previous = current
                 current = current.next
             
-            
-
-
-
 
     def find_max(self):             
         if self.head != None:
@@ -56,7 +52,18 @@ class singly_linked_list():
             while current != None:
                 print(current.element)
                 current = current.next
+
+
+    def find_target(self, target):
         
+        current = self.head 
+        
+        while current != None:
+            if current.element == target:
+                return True
+            current = current.next
+        return False
+            
 
 
 
@@ -81,3 +88,5 @@ l.insert(60)
 l.print()
 
 print(l.find_max())
+
+print(l.find_target(60))

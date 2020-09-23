@@ -10,12 +10,17 @@ Singly Linked List
     - Deletion
     - Merging
 
+Heap
+    - Heap Merge
+
+
 
 To Implement:
 
-    - Heap
+    - Max Heap
     - Hash Table/Tree
     - Graph
 
+https://www.tutorialspoint.com/data_structures_algorithms/ 
 
 https://en.wikipedia.org/wiki/List_of_data_structures

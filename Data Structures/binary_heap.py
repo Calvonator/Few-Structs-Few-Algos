@@ -39,19 +39,23 @@ class min_heap():
         self.swap(self.size, 1)
         del self.heap[-1]
         self.size -= 1
-        self.percolate_down()
+        self.percolate_down(1)
 
         return del_val
 
-    def percolate_down(self):                          
+    def percolate_down(self, i):                          
 
-        node = 1
-        mc = self.min_child(node) 
-    
-        while node < self.size:
-            self.swap(node, mc)
-            node = mc
+        node = i
+
+        while (node * 2) <=self.size:
+
             mc = self.min_child(node)
+
+            if self.heap[node] > self.heap[mc]:
+                self.swap(node, mc)
+            
+            node = mc
+
 
     def min_child(self, parent):
         
@@ -88,7 +92,7 @@ class min_heap():
             self.heap = [0] + init_heap
 
             while (i > 0):
-                self.percolate_down()
+                self.percolate_down(i)
                 i -= 1
 
         else:
@@ -96,7 +100,7 @@ class min_heap():
     
     #def merge_heap(self):
 
-init = [5, 9, 11, 14, 18, 19, 21, 33, 17, 27]
+init = [21, 33, 17, 5, 11, 27, 9, 14, 18, 19]
 
 tst = min_heap(*init)
 print(tst.heap)
